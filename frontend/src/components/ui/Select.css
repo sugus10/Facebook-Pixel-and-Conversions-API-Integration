@@ -1,0 +1,146 @@
+/* Select Component Styles */
+.select-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.select-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--secondary-700);
+  margin-bottom: var(--space-1);
+}
+
+.select-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.select {
+  width: 100%;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  color: var(--secondary-800);
+  background: white;
+  border: 1px solid var(--secondary-300);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-fast);
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  padding-right: 3rem;
+}
+
+.select:focus {
+  border-color: var(--primary-500);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.select:hover:not(:focus) {
+  border-color: var(--secondary-400);
+}
+
+/* Select Sizes */
+.select--sm {
+  padding: var(--space-2) var(--space-3);
+  font-size: 0.875rem;
+  min-height: 2rem;
+}
+
+.select--md {
+  padding: var(--space-3) var(--space-4);
+  font-size: 1rem;
+  min-height: 2.75rem;
+}
+
+.select--lg {
+  padding: var(--space-4) var(--space-5);
+  font-size: 1.125rem;
+  min-height: 3.5rem;
+}
+
+/* Select Variants */
+.select--default {
+  background: white;
+}
+
+.select--filled {
+  background: var(--secondary-50);
+  border-color: transparent;
+}
+
+.select--filled:focus {
+  background: white;
+  border-color: var(--primary-500);
+}
+
+/* Select States */
+.select--error {
+  border-color: var(--error-500);
+}
+
+.select--error:focus {
+  border-color: var(--error-500);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+/* Select Icon */
+.select-icon {
+  position: absolute;
+  right: var(--space-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--secondary-400);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.select:focus + .select-icon,
+.select-wrapper:has(.select:focus) .select-icon {
+  color: var(--primary-500);
+}
+
+/* Select Messages */
+.select-error {
+  font-size: 0.875rem;
+  color: var(--error-600);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.select-helper {
+  font-size: 0.875rem;
+  color: var(--secondary-500);
+}
+
+/* Disabled State */
+.select:disabled {
+  background: var(--secondary-100);
+  color: var(--secondary-400);
+  cursor: not-allowed;
+  border-color: var(--secondary-200);
+}
+
+/* Option Styles */
+.select option {
+  padding: var(--space-2);
+  background: white;
+  color: var(--secondary-800);
+}
+
+.select option:disabled {
+  color: var(--secondary-400);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .select--lg {
+    padding: var(--space-3) var(--space-4);
+    font-size: 1rem;
+    min-height: 3rem;
+  }
+}

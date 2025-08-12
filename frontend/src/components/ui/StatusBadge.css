@@ -1,0 +1,75 @@
+/* Status Badge Component Styles */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+}
+
+/* Badge Variants */
+.status-badge--default {
+  background: var(--secondary-100);
+  color: var(--secondary-700);
+}
+
+.status-badge--primary {
+  background: var(--primary-100);
+  color: var(--primary-700);
+}
+
+.status-badge--success {
+  background: var(--success-100);
+  color: var(--success-700);
+}
+
+.status-badge--warning {
+  background: var(--warning-100);
+  color: var(--warning-700);
+}
+
+.status-badge--error {
+  background: var(--error-100);
+  color: var(--error-700);
+}
+
+.status-badge--info {
+  background: var(--primary-50);
+  color: var(--primary-600);
+}
+
+/* Badge Sizes */
+.status-badge--sm {
+  padding: var(--space-1) var(--space-2);
+  font-size: 0.75rem;
+}
+
+.status-badge--md {
+  padding: var(--space-2) var(--space-3);
+  font-size: 0.875rem;
+}
+
+.status-badge--lg {
+  padding: var(--space-3) var(--space-4);
+  font-size: 1rem;
+}
+
+/* Badge Icon */
+.status-badge__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875em;
+}
+
+.status-badge__text {
+  line-height: 1;
+}
+
+/* Hover Effects */
+.status-badge:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}

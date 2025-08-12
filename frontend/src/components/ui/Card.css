@@ -1,0 +1,95 @@
+/* Card Component Styles */
+.card {
+  background: white;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--secondary-200);
+  transition: all var(--transition-normal);
+  overflow: hidden;
+}
+
+.card--hover:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+  border-color: var(--secondary-300);
+}
+
+/* Card Variants */
+.card--default {
+  background: white;
+}
+
+.card--elevated {
+  box-shadow: var(--shadow-md);
+}
+
+.card--elevated:hover {
+  box-shadow: var(--shadow-xl);
+}
+
+.card--outlined {
+  border: 2px solid var(--secondary-200);
+  box-shadow: none;
+}
+
+.card--glass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Card Padding */
+.card--padding-none {
+  padding: 0;
+}
+
+.card--padding-sm {
+  padding: var(--space-4);
+}
+
+.card--padding-md {
+  padding: var(--space-6);
+}
+
+.card--padding-lg {
+  padding: var(--space-8);
+}
+
+/* Card Sections */
+.card__header {
+  padding: var(--space-6) var(--space-6) var(--space-4) var(--space-6);
+  border-bottom: 1px solid var(--secondary-100);
+}
+
+.card__body {
+  padding: var(--space-4) var(--space-6);
+}
+
+.card__footer {
+  padding: var(--space-4) var(--space-6) var(--space-6) var(--space-6);
+  border-top: 1px solid var(--secondary-100);
+  background: var(--secondary-50);
+}
+
+/* When using sections, remove default padding */
+.card:has(.card__header, .card__body, .card__footer) {
+  padding: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .card--padding-md {
+    padding: var(--space-4);
+  }
+  
+  .card--padding-lg {
+    padding: var(--space-6);
+  }
+  
+  .card__header,
+  .card__body,
+  .card__footer {
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+  }
+}

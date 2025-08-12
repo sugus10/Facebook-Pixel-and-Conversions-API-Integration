@@ -1,0 +1,84 @@
+/* Table Component Styles */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--secondary-200);
+  background: white;
+  box-shadow: var(--shadow-sm);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+/* Table Header */
+.table__header {
+  background: var(--secondary-50);
+  border-bottom: 2px solid var(--secondary-200);
+}
+
+.table__header-cell {
+  padding: var(--space-4) var(--space-6);
+  text-align: left;
+  font-weight: 600;
+  color: var(--secondary-700);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+/* Table Body */
+.table__body {
+  background: white;
+}
+
+.table__row {
+  border-bottom: 1px solid var(--secondary-100);
+  transition: all var(--transition-fast);
+}
+
+.table__row:last-child {
+  border-bottom: none;
+}
+
+.table__cell {
+  padding: var(--space-4) var(--space-6);
+  color: var(--secondary-800);
+  vertical-align: middle;
+}
+
+/* Table Variants */
+.table--striped .table__row:nth-child(even) {
+  background: var(--secondary-25);
+}
+
+.table--hover .table__row:hover {
+  background: var(--primary-25);
+  transform: scale(1.001);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .table__header-cell,
+  .table__cell {
+    padding: var(--space-3) var(--space-4);
+  }
+  
+  .table {
+    font-size: 0.8125rem;
+  }
+  
+  .table__header-cell {
+    font-size: 0.6875rem;
+  }
+}
+
+/* Custom color variants for specific use cases */
+:root {
+  --secondary-25: #fafafa;
+  --primary-25: #fafbff;
+}
