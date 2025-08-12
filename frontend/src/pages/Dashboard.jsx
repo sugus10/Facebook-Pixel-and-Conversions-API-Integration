@@ -55,6 +55,13 @@ const Dashboard = () => {
     fetchEvents();
   }, []);
 
+  // Keep localStorage in sync for Landing page pixel injection
+  useEffect(() => {
+    if (user?.selectedPixelId) {
+      try { localStorage.setItem('selectedPixelId', user.selectedPixelId); } catch (_) {}
+    }
+  }, [user]);
+
   const handleSavePixel = async () => {
     setSaveLoading(true);
     try {
@@ -64,6 +71,7 @@ const Dashboard = () => {
         { withCredentials: true }
       );
       setMessage(res.data.msg);
+      try { localStorage.setItem('selectedPixelId', selectedPixel); } catch (_) {}
       // Refresh user data to show the newly selected pixel
       fetchUserData();
     } catch (err) {
