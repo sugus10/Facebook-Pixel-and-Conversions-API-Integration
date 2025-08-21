@@ -9,7 +9,8 @@ passport.use(
       clientID: process.env.FACEBOOK_APP_ID,
       clientSecret: process.env.FACEBOOK_APP_SECRET,
       callbackURL: '/api/auth/facebook/callback',
-      profileFields: ['id', 'displayName', 'emails'],
+      profileFields: ['id', 'displayName', 'emails', 'photos'],
+      enableProof: true,
     },
     async (accessToken, refreshToken, profile, done) => {
       const newUser = {

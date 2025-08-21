@@ -16,7 +16,7 @@ exports.getPixels = async (req, res) => {
 
     // 1. Get ad accounts
     const adAccountsRes = await axios.get(
-      `https://graph.facebook.com/v19.0/me/adaccounts?access_token=${accessToken}`
+      `https://graph.facebook.com/v21.0/me/adaccounts?access_token=${accessToken}`
     );
 
     if (adAccountsRes.data && adAccountsRes.data.data) {
@@ -28,7 +28,7 @@ exports.getPixels = async (req, res) => {
     // 2. For each ad account, get owned pixels
     for (const accountId of adAccounts) {
       const pixelsRes = await axios.get(
-        `https://graph.facebook.com/v19.0/act_${accountId}/owned_pixels?access_token=${accessToken}`
+        `https://graph.facebook.com/v21.0/act_${accountId}/owned_pixels?access_token=${accessToken}`
       );
       if (pixelsRes.data && pixelsRes.data.data) {
         pixelsRes.data.data.forEach(pixel => {

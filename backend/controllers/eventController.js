@@ -7,7 +7,7 @@ const crypto = require('crypto');
 const sendEventToFacebook = async (pixelId, accessToken, eventData) => {
   try {
     const response = await axios.post(
-      `https://graph.facebook.com/v19.0/${pixelId}/events?access_token=${accessToken}`,
+      `https://graph.facebook.com/v21.0/${pixelId}/events?access_token=${accessToken}`,
       {
         data: [eventData],
       }

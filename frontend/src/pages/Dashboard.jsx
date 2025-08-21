@@ -34,9 +34,18 @@ const Dashboard = () => {
       const res = await axios.get('/api/user/pixels', { withCredentials: true });
       setPixels(res.data);
     } catch (err) {
-      // Do not block the page; allow manual pixel entry
+      console.log('Pixel fetch error:', err.response?.data || err.message);
+      
+      // Handle specific error cases
+      if (err.response?.status === 403 && err.response?.data?.error === 'MISSING_PERMISSIONS') {
+        setMessage('Missing Facebook permissions. Please log out and log back in, then grant the requested permissions when Facebook asks.');
+      } else if (err.response?.status === 400 && err.response?.data?.error === 'MISSING_TOKEN') {
+        setMessage('Access token missing. Please log out and log back in.');
+      } else {
+        setMessage('Could not fetch Facebook Pixels automatically. You can manually enter your Pixel ID below.');
+      }
+      
       setPixels([]);
-      setMessage('Could not fetch Facebook Pixels. You can paste a Pixel ID manually.');
     }
   };
 

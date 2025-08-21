@@ -27,25 +27,51 @@ router.get('/pixels', async (req, res) => {
       return res.status(401).json({ msg: 'Not authorized' });
     }
 
-    // Get ad accounts first
-    const adAccountsResponse = await axios.get(
-      `https://graph.facebook.com/v18.0/me/adaccounts?access_token=${req.user.accessToken}`
-    );
+    if (!req.user.accessToken) {
+      return res.status(400).json({ 
+        msg: 'No access token available. Please log in again.',
+        error: 'MISSING_TOKEN'
+      });
+    }
+
+    // Try to get ad accounts first
+    let adAccountsResponse;
+    try {
+      adAccountsResponse = await axios.get(
+        `https://graph.facebook.com/v21.0/me/adaccounts?access_token=${req.user.accessToken}`
+      );
+    } catch (err) {
+      console.log('Could not fetch ad accounts:', err.response?.data || err.message);
+      
+      // Check if it's a permissions error
+      if (err.response?.status === 403) {
+        return res.status(403).json({ 
+          msg: 'Missing permissions. Please grant ads_read permission when logging in.',
+          error: 'MISSING_PERMISSIONS',
+          details: err.response.data
+        });
+      }
+      
+      // If user doesn't have ad accounts or permissions, return empty array
+      return res.json([]);
+    }
 
     const pixels = [];
     
     // For each ad account, get pixels
-    for (const account of adAccountsResponse.data.data) {
-      try {
-        const pixelsResponse = await axios.get(
-          `https://graph.facebook.com/v18.0/${account.id}/owned_pixels?access_token=${req.user.accessToken}`
-        );
-        
-        if (pixelsResponse.data.data) {
-          pixels.push(...pixelsResponse.data.data);
+    if (adAccountsResponse.data && adAccountsResponse.data.data) {
+      for (const account of adAccountsResponse.data.data) {
+        try {
+          const pixelsResponse = await axios.get(
+            `https://graph.facebook.com/v21.0/${account.id}/owned_pixels?access_token=${req.user.accessToken}`
+          );
+          
+          if (pixelsResponse.data.data) {
+            pixels.push(...pixelsResponse.data.data);
+          }
+        } catch (err) {
+          console.log(`Could not fetch pixels for account ${account.id}:`, err.response?.data || err.message);
         }
-      } catch (err) {
-        console.log(`Could not fetch pixels for account ${account.id}`);
       }
     }
 
